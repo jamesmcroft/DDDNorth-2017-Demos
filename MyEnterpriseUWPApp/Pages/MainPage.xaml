@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="MyEnterpriseUWPApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:grid="using:Telerik.UI.Xaml.Controls.Grid"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid
+            x:Name="Header"
+            Padding="20"
+            Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Products" />
+        </Grid>
+
+        <grid:RadDataGrid
+            Grid.Row="1"
+            Background="{ThemeResource SystemControlAcrylicElementBrush}"
+            CanUserChooseColumns="True"
+            GroupHeaderDisplayMode="Scrollable"
+            GroupPanelPosition="Left"
+            ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}"
+            SelectedItem="{x:Bind ViewModel.SelectedProduct, Mode=TwoWay}"
+            UserColumnReorderMode="Interactive"
+            UserEditMode="External" />
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar DefaultLabelPosition="Right">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton
+                    Command="{x:Bind ViewModel.PurchaseItemCommand, Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.IsPurchaseEnabled, Mode=OneWay}"
+                    Label="Purchase">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xEF40;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
